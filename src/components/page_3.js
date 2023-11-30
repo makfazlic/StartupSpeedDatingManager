@@ -6,9 +6,11 @@ import getFinal from "@/firebase/getFinal";
 
 export default function Page3() {
   const [times, setTimes] = useState([]);
+  const [times2, setTimes2] = useState([]);
   const [miniPage, setMiniPage] = useState(1);
   const [data, setData] = useState([]);
   const [id, setId] = useState("");
+  const [premium, setPremium] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -19,9 +21,10 @@ export default function Page3() {
   }, []);
 
   const handleSubmit = async () => {
-    let times_local = [];
     // for each data
     data.forEach((element) => {
+        let times_local = [];
+
       let key = Object.keys(element)[0];
       if (key === id) {
         let values = Object.values(element);
@@ -34,7 +37,25 @@ export default function Page3() {
           let id = values[i].id;
           times_local.push({ time: time, name: name, id: id });
         }
+        console.log("1",times_local);
         setTimes(times_local);
+      }
+      if (key === id + "-1") {
+        let times_local = [];
+
+        setPremium(true);
+        let values = Object.values(element);
+        // connvert values to array
+        values = values[0];
+        console.log(values);
+        for (let i = 0; i < values.length; i++) {
+          let time = values[i].round;
+          let name = values[i].name;
+          let id = values[i].id;
+          times_local.push({ time: time, name: name, id: id });
+        }
+        console.log("2",times_local);
+        setTimes2(times_local);
       }
     });
 
@@ -61,9 +82,14 @@ export default function Page3() {
       </button>
     </div>
   ) : (
-    <div className="flex flex-col items-center justify-center h-full py-2">
+    <div className="flex flex-col items-center justify-center h-full w-full  py-2"
+    >
+    {/* Golden background if premoium */}
+
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-5">
-        Your Time Table:{" "}
+        {
+            premium ? "Premium Startup pairings:" : "Your time slots:"
+        }
       </h1>
       {/* <div class="grid grid-cols-1 grid-flow-row gap-4 p-4 text-2xl">
         {times.map((timeData) => (
@@ -74,23 +100,47 @@ export default function Page3() {
       </div> 
       Make the upper part as a table
       */}
-      <table class="table-auto pd-4 text-xl md:text-2xl">
+      <table class="table-auto pd-4 text-xl md:text-2xl mt-10">
         <thead className="border-b-2 border-gray-300">
           <tr>
             <th class="px-4 py-2">Name</th>
             <th class="px-4 py-2">Time Slot</th>
           </tr>
         </thead>
-        
+
         <tbody>
           {times.map((timeData) => (
             <tr className="" key={timeData.id}>
-              <td class="border px-4 py-2 text-left">{timeData.name.replaceAll("_", " ")}</td>
+              <td class="border px-4 py-2 text-left">
+                {timeData.name.replaceAll("_", " ")}
+              </td>
               <td class="border px-4 py-2 text-center">{timeData.time}</td>
             </tr>
           ))}
         </tbody>
+      </table>
+      {premium ? (
+        <table class="table-auto pd-4 text-xl md:text-2xl mt-20">
+            <thead className="border-b-2 border-gray-300">
+                <tr>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Time Slot</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {times2.map((timeData) => (
+                <tr className="" key={timeData.id}>
+                    <td class="border px-4 py-2 text-left">
+                    {timeData.name.replaceAll("_", " ")}
+                    </td>
+                    <td class="border px-4 py-2 text-center">{timeData.time}</td>
+                </tr>
+                ))}
+            </tbody>
         </table>
+        ) : null    
+    }
     </div>
   );
 }
