@@ -69,7 +69,7 @@ export default function Page1({ changeState }) {
   };
 
   return miniPage === 1 ? (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center h-full py-2">
       <h1 className="text-4xl md:text-5xl font-bold text-center">
         Welcome to SSD!{" "}
       </h1>
@@ -88,13 +88,13 @@ export default function Page1({ changeState }) {
       </button>
     </div>
   ) : (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center h-full py-2">
       <h1 className="text-3xl md:text-4xl font-bold text-center">
         Chose your Startups!{" "}
       </h1>
-      <div className="px-10 md:px-0 w-full md:w-1/3">
+      <div className="px-10 md:px-0 w-full md:w-5/6">
         <fieldset>
-          <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200 ">
+          <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200 w-full ">
             {startups.map((person, personIdx) => (
               <div
                 key={personIdx}

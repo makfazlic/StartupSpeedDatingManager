@@ -54,7 +54,7 @@ const MainPage = () => {
   };
 
   return (
-    <>
+    <div className='min-h-screen w-full flex flex-col items-center justify-between'>
       <div className="flex flex-col items-center justify-center h-30 w-full">
 
         <Image src="/logo.png" alt="Logo h-20" width={200} height={200} />
@@ -64,7 +64,7 @@ const MainPage = () => {
         <div className="flex flex-col items-center justify-center mb-10 w-full">
           <p className='text-center text-sm'>Developed with 💗 by IT Committee of ETH Entrepreneur Club in 2023</p>
         </div>
-    </>
+    </div>
   );
 };
 

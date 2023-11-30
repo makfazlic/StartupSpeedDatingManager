@@ -42,7 +42,7 @@ export default function Page3() {
   };
 
   return miniPage === 1 ? (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center h-full py-2">
       <h1 className="text-4xl md:text-5xl font-bold text-center">
         Get your Matches!{" "}
       </h1>
@@ -61,7 +61,7 @@ export default function Page3() {
       </button>
     </div>
   ) : (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center h-full py-2">
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-5">
         Your Time Table:{" "}
       </h1>
@@ -85,7 +85,7 @@ export default function Page3() {
         <tbody>
           {times.map((timeData) => (
             <tr className="" key={timeData.id}>
-              <td class="border px-4 py-2 text-left">{timeData.name}</td>
+              <td class="border px-4 py-2 text-left">{timeData.name.replaceAll("_", " ")}</td>
               <td class="border px-4 py-2 text-center">{timeData.time}</td>
             </tr>
           ))}
